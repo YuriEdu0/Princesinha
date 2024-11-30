@@ -1,0 +1,48 @@
+-- Adminer 4.8.1 MySQL 5.5.5-10.5.26-MariaDB-ubu2004 dump
+
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+SET NAMES utf8mb4;
+
+DROP DATABASE IF EXISTS `BD_Princesa`;
+CREATE DATABASE `BD_Princesa` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `BD_Princesa`;
+
+DROP TABLE IF EXISTS `curiosidades`;
+CREATE TABLE `curiosidades` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `princesa_id` int(11) NOT NULL,
+  `texto` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `princesa_id` (`princesa_id`),
+  CONSTRAINT `curiosidades_ibfk_1` FOREIGN KEY (`princesa_id`) REFERENCES `princesas` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+DROP TABLE IF EXISTS `imagens`;
+CREATE TABLE `imagens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `princesa_id` int(11) NOT NULL,
+  `caminho_imagem` varchar(255) NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `princesa_id` (`princesa_id`),
+  CONSTRAINT `imagens_ibfk_1` FOREIGN KEY (`princesa_id`) REFERENCES `princesas` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+DROP TABLE IF EXISTS `princesas`;
+CREATE TABLE `princesas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `filme` varchar(100) NOT NULL,
+  `ano_lancamento` year(4) NOT NULL,
+  `descricao` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- 2024-11-30 00:43:07
